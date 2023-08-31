@@ -19,37 +19,6 @@ namespace LifeSim_3_GPU.Game
         {
             World = world;
             Scene = new(world.Setup.Size.W, world.Setup.Size.H, PIXEL_FORMAT);
-
-            CreateCellsWithEmpty();
-            InitSpawnOnRandomPos();
-        }
-
-        private static void CreateCellsWithEmpty()
-        {
-            //Cells = new CellData[World.Setup.Size.H, World.Setup.Size.W];
-            //for (int y = 0; y < World.Setup.Size.H; y++)
-            //{
-            //    for (int x = 0; x < World.Setup.Size.W; x++)
-            //    {
-            //        MyColor randomColor = GenerateRandomColor();
-            //        int randomDir = RandomIntFromRNG(0, 7);
-            //        int photosinthesValue = 10;
-            //        int mineralsInWater = 2;
-            //        Cells[y, x] = new CellData(x, y, randomColor, randomDir, photosinthesValue, mineralsInWater, World.Setup.InitEnergy, World.Setup.InitMinerals);
-            //        Cells[y, x].Type = 0;
-            //    }
-            //}
-        }
-
-        private static void InitSpawnOnRandomPos()
-        {
-            //for (int i = 0; i < World.Setup.InitCreatureCount; i++)
-            //{
-            //    int random_x = RandomIntFromRNG(0, World.Setup.Size.W);
-            //    int random_y = RandomIntFromRNG(0, World.Setup.Size.H);
-            //    Cells[random_y, random_x].IsSpawn = 1;
-            //    Cells[random_y, random_x].Type = 1;
-            //}
         }
 
         private static MyColor GenerateRandomColor()

@@ -27,13 +27,11 @@ namespace LifeSim_3_GPU.GPU_Side.KernelsThing
         {
             for (int i = 0; i < sizes.genLen * 3; i++)
             {
-                //genes[index.Y, index.X, i] = (byte)(255 / rnd[index.Y, index.X].NextFloat32_0to1());
                 genes[index.Y, index.X, i] = rnd[index.Y, index.X].NextByte();
             }
         }
         private static void FillGenesWithRandom(Index3D index, ArrayView1D<long, Stride1D.Dense> randomNumers, ArrayView3D<byte, Stride3D.DenseXY> genes, SizesForRandomGenes sizes)
         {
-            //return;
             // 8 == how much byte in long
             //int rndLong_index = index.Y * sizes.h + index.X * sizes.w + index.Z;
             int rndLong_index = (index.Z * sizes.w * sizes.h) + (index.Y * sizes.w) + index.X;
@@ -54,7 +52,7 @@ namespace LifeSim_3_GPU.GPU_Side.KernelsThing
         {
             int flatIndex = (index.Y * constants.Size.W) + index.X;
 
-            rnd[index.Y, index.X] = new KernelRandom2((uint)flatIndex);
+            rnd[index.Y, index.X] = new KernelRandom2((uint)flatIndex + seed);
         }
 
         private static void InitSpawn(Index1D index,

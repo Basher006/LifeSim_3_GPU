@@ -402,40 +402,8 @@ namespace LifeSim_3_GPU.GPU_Side.KernelsThing
             }
         }
 
-        private static void HueShiftOnMutate2(int target_x, int target_y, ArrayView2D<CellData, Stride2D.DenseX> sourseCells, ArrayView3D<byte, Stride3D.DenseXY> genes, ArrayView2D<KernelRandom2, Stride2D.DenseY> rnd, TurnKernelConstants constans)
-        {
-            double hueSum = 0, satSum = 0, valSum = 0;
-            for (int i = 0; i < constans.GenLen * 3; i += 3)
-            {
-                hueSum += genes[target_y, target_x, i];
-                satSum += genes[target_y, target_x, i + 1];
-                valSum += genes[target_y, target_x, i + 2];
-            }
-
-            double hue = rnd[target_y, target_x].NextFloat32_0to1(0, 360, (uint)hueSum);
-            double sat = rnd[target_y, target_x].NextFloat32_0to1(0.5d, 0.9d, (uint)satSum);
-            double val = rnd[target_y, target_x].NextFloat32_0to1(0.75d, 1d, (uint)valSum);
-
-            byte[] rgb = ColorConverter.HSVToRGB(hue, sat, val);
-
-            sourseCells[target_y, target_x].Color = new(rgb[0], rgb[1], rgb[2]);
-        }
-
         private static void HueShiftOnMutate(int target_x, int target_y, ArrayView2D<CellData, Stride2D.DenseX> sourseCells, int shift=10)
         {
-            //byte R = sourseCells[target_y, target_x].Color.R;
-            //byte G = sourseCells[target_y, target_x].Color.G;
-            //byte B = sourseCells[target_y, target_x].Color.B;
-
-            //double[] hsv = ColorConverter.RGBToHSV(R, G, B);
-            //hsv[0] += shift;
-            //if (hsv[0] > 360)
-            //    hsv[0] -= 360;
-            //byte[] rgb = ColorConverter.HSVToRGB(hsv[0], hsv[2], hsv[2]);
-
-            //MyColor c = new(rgb[0], rgb[1], rgb[2]);
-            //sourseCells[target_y, target_x].Color.CopyFrom(c);
-
             HSV hsv = ColorConverter.RGBToHSV(sourseCells[target_y, target_x].Color);
             hsv.H += shift;
             if (hsv.H > 360)
@@ -444,9 +412,6 @@ namespace LifeSim_3_GPU.GPU_Side.KernelsThing
             hsv.S = TurnKernelConstants.CREATURE_SAT;
             MyColor shiftedColor = ColorConverter.HSVToRGB(hsv);
             sourseCells[target_y, target_x].Color = shiftedColor;
-
-            //sourseCells[target_y, target_x].Color.HueShif(shift);
-
         }
 
         #endregion

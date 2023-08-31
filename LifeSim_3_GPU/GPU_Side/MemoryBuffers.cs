@@ -28,18 +28,12 @@ namespace LifeSim_3_GPU.GPU_Side
             _createCellsBuffer(_accelerator, setup);
             _createGenesBuffer(_accelerator, setup);
 
-            // not like this :-(
             _createMoveEnergyCostBuffer(_accelerator, TurnKernel.MoveEnergyCost);
             _createEnergyCost_inWaterBuffer(_accelerator, TurnKernel.MoveEnergyCost_inWater);
             _createMoveDirsBuffer(_accelerator, TurnKernel.Dirs);
 
             _createRandomBuffer(_accelerator, setup);
         }
-
-        //private void _createCellsBuffer(Accelerator _accelerator, CellData[,] cells)
-        //{
-        //    Cells_mb = _accelerator.Allocate2DDenseX(cells);
-        //}
 
         private void _createCellsBuffer(Accelerator _accelerator, WorldSetup setup)
         {

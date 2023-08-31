@@ -85,7 +85,6 @@ namespace LifeSim_3_GPU.GPU_Side.KernelsThing
         {
             double scale = NextFloat32_0to1();
             return (byte)(256 * scale);
-
         }
     }
 }

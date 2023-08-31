@@ -28,7 +28,6 @@ namespace LifeSim_3_GPU
 
         private Point CameraPos;
         private Point GameField_Center;
-        //private Point MousePosOnScale = new(0, 0);
 
         private int scale = 3;
         public static readonly float[] ScalesList = { 0.125f, 0.25f, 0.5f, 1, 2, 4, 8, 16, 32 };
@@ -36,8 +35,6 @@ namespace LifeSim_3_GPU
 
 
         bool firstTime = true;
-
-        //GPU_Context gpu;
 
         public Form1()
         {
@@ -58,15 +55,7 @@ namespace LifeSim_3_GPU
             total = $"({GameScene.World.Setup.Size.W} x {GameScene.World.Setup.Size.H} total: {GameScene.World.Setup.Size.W * GameScene.World.Setup.Size.H})";
             Text = total;
 
-            //gpu = new(GameScene.Cells, GameScene.World.Setup);
-            //gpu.Cells_Render(new RECT(CameraPos.X, CameraPos.Y, PicterBoxSize.Width, PicterBoxSize.Height), ScalesList[scale]);
-
             UpdatePictureBox();
-            //MainLoop.Run();
-
-            // 1. world borders draw as decrise sides
-            // 2. creature/corpses/minerals counter
-            // 3. creatures turn
         }
 
         private void UpdatePictureBox()
@@ -78,7 +67,7 @@ namespace LifeSim_3_GPU
 
                 DrawTextOnBitmap(ref scene);
                 UpdateIMG(scene);
-                GC.Collect(3); // 3 == best fps/eps
+                GC.Collect(3); // 3 == best fps/tps
             }
         }
 
@@ -213,7 +202,7 @@ namespace LifeSim_3_GPU
 
         private void DrawTextOnBitmap(ref Bitmap img)
         {
-            // this is just test
+            // this is just for test
 
             string text = "Scale: X" + ScalesList[scale].ToString();
 
@@ -245,7 +234,7 @@ namespace LifeSim_3_GPU
         private void UpdateCounters()
         {
             fps_lable.Text = $"FPS: {FPS}";
-            tps_lable.Text = $"Truns : {TurnsCounter} ({TPS})";
+            tps_lable.Text = $"Turns : {TurnsCounter} ({TPS}/c)";
             //total_lable.Text = total;
         }
     }
