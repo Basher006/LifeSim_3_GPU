@@ -234,7 +234,7 @@ namespace LifeSim_3_GPU
         private void UpdateCounters()
         {
             fps_lable.Text = $"FPS: {FPS}";
-            tps_lable.Text = $"Turns : {TurnsCounter} ({TPS}/c)";
+            tps_lable.Text = $"Epoch : {TurnsCounter} ({TPS}/c)";
             //total_lable.Text = total;
         }
     }
